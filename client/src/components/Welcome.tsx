@@ -5,15 +5,16 @@ import { BsInfoCircle } from "react-icons/bs";
 import TextField from "./globals/TextField";
 import Loader from "./Loader";
 
+import { TransactionContext } from "../context/TransactionContext";
 const Welcome: React.FC = () => {
    
-  const connectWallet = () =>{
-
-  }
+ 
 
   const handleSubmit = () =>{
     
   }
+  // @ts-ignore
+  const {connectWallet, currentAccount} = useContext(TransactionContext);
 
   return (
     <>
@@ -27,14 +28,17 @@ const Welcome: React.FC = () => {
             Explore the crypto world. Buy and sell cryptocurrencies easily on
             Krypto.
           </p>
-          <button
+          {!currentAccount && (
+            <button
             type="button"
-            // onClick={connectWallet}
+            onClick={connectWallet}
             className="flex flex-row justify-center items-center my-10 bg-[#2952e3] py-3 px-16 rounded-full cursor-pointer hover:bg-[#2546bd]"
           >
             <AiFillPlayCircle className="text-white mr-2" />
             <p className="text-white text-base font-semibold">Connect Wallet</p>
           </button>
+          )}
+          
         </div>
         <div className="flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10">
             <div className="p-3 flex justify-end items-start flex-col rounded-xl h-48 xl:w-[70%] w-full my-5 eth-card bg-[#2546bd]">
@@ -58,9 +62,9 @@ const Welcome: React.FC = () => {
 </div>
 <div className="p-5 sm:w-[50%] w-full flex flex-col justify-start items-center bg-[#2952e3]">
   <div className="w-[70%]">
-  <TextField placeholder="Recipient" type="text" value="" name="addressTo"   />
-  <TextField placeholder="Amount (ETH)" type="number" value="" name="addressTo"  />
-  <TextField placeholder="message" type="text" value="" name="message"   />
+  <TextField placeholder="Recipient" type="text"  name="addressTo"   />
+  <TextField placeholder="Amount (ETH)" type="number"  name="addressTo"  />
+  <TextField placeholder="message" type="text"  name="message"   />
 
   <div className="h-[1px] w-full bg-gray-400 my-2" />
 

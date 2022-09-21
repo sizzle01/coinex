@@ -4,7 +4,7 @@ interface inputProps{
     placeholder: string
     type: string
     step?: string
-    value: string
+    value?: string
     name: string
     onChange?: ()=>void
 }
