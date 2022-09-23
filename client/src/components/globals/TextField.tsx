@@ -6,20 +6,20 @@ interface inputProps{
     step?: string
     value?: string
     name: string
-    onChange?: ()=>void
+    handleChange?: ()=>void
 }
 
-const TextField: React.FC<inputProps> = ({placeholder, type, value,name, onChange}) => {
+const TextField: React.FC<inputProps> = ({placeholder, type, value,name, handleChange}) => {
   return (
     <div>
         <input
-        onChange={onChange}
+        onChange={handleChange}
     placeholder={placeholder}
     name={name}
     type={type}
     step="0.0001"
     value={value}
-    className="my-2 w-full rounded-sm p-2 outline-none  text-white border-none text-sm white-glassmorphism"
+    className="my-2 w-full rounded-sm p-2 outline-none border-none text-sm "
   />
     </div>
   )

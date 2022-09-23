@@ -6,15 +6,21 @@ import TextField from "./globals/TextField";
 import Loader from "./Loader";
 
 import { TransactionContext } from "../context/TransactionContext";
+ import { trimAddress } from "../utils/TrimAddress";
 const Welcome: React.FC = () => {
    
- 
+ // @ts-ignore
+  const {connectWallet, currentAccount, formData, handleChange, sendTransaction} = useContext(TransactionContext);
 
-  const handleSubmit = () =>{
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) =>{
+    const { addressTo, amount, keyword, message } = formData;
+    console.log(addressTo, amount, keyword, message)
+    e.preventDefault();
+     if (!addressTo || !amount || !keyword || !message) return;
+     sendTransaction();
     
   }
-  // @ts-ignore
-  const {connectWallet, currentAccount} = useContext(TransactionContext);
+  
 
   return (
     <>
@@ -50,7 +56,7 @@ const Welcome: React.FC = () => {
                   <BsInfoCircle fontSize={17} color="#fff" />
                 </div>
                 <div>
-                  <p className="text-white font-light text-sm">0x493843934</p>
+                  <p className="text-white font-light text-sm">{trimAddress(currentAccount) }</p>
                   <p className="text-white font-semibold text-lg mt-1">
                     Ethereum
                   </p>
@@ -62,18 +68,19 @@ const Welcome: React.FC = () => {
 </div>
 <div className="p-5 sm:w-[50%] w-full flex flex-col justify-start items-center bg-[#2952e3]">
   <div className="w-[70%]">
-  <TextField placeholder="Recipient" type="text"  name="addressTo"   />
-  <TextField placeholder="Amount (ETH)" type="number"  name="addressTo"  />
-  <TextField placeholder="message" type="text"  name="message"   />
+  <TextField placeholder="Recipient" type="text"  name="addressTo"  handleChange={handleChange} />
+  <TextField placeholder="Amount (ETH)" type="number"  name="amount"  handleChange={handleChange}/>
+  <TextField placeholder="message" type="text"  name="message" handleChange={handleChange} />
+  <TextField placeholder="Keyword" type="text"  name="keyword" handleChange={handleChange}  />
 
   <div className="h-[1px] w-full bg-gray-400 my-2" />
 
-  {true
+  {false
               ? <Loader />
               : (
                 <button
                   type="button"
-                  // onClick={handleSubmit}
+                  onClick={handleSubmit}
                   className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer"
                 >
                   Send Ethereum

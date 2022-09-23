@@ -2,13 +2,15 @@ import '../../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Layout from '../components/globals/Layout'
 
-import { TransactionProvider } from '../context/TransactionContext'
+import {TransactionProvider} from '../context/TransactionContext'
+
 
 
 
 function MyApp({ Component, pageProps }: AppProps) {
  
   return(
+
     <TransactionProvider>
     <Layout>
       <Component {...pageProps} />
