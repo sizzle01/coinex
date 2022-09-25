@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
   return (
    <nav className='w-full flex md:justify-center justify-between items-center p-4 bg-darkBg' >
     <div className="md:flex-[0.5] flex-initial justify-center items-center">
-        <Image src={Logo} alt="logo" className="w-20 cursor-pointer" />
+        <Image src={Logo} alt="logo" height={100} width={200} className="cursor-pointer" />
       </div>
       <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
         {[ "NFTs", "Manager", "Wallets"].map((item, index) => (
