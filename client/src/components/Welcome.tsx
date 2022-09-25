@@ -7,6 +7,9 @@ import Loader from "./Loader";
 
 import { TransactionContext } from "../context/TransactionContext";
 import { trimAddress } from "../utils/TrimAddress";
+import OurServices from "./OurServices";
+
+
 const Welcome: React.FC = () => {
  // @ts-ignore
   const {connectWallet, currentAccount,formData,handleChange,sendTransaction,
@@ -103,7 +106,7 @@ const Welcome: React.FC = () => {
               <button
                 type="button"
                 onClick={handleSubmit}
-                className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer"
+                className="text-white w-full mt-2 border-[1px] p-2 border-white hover:bg-[#3d4f7c] rounded-full cursor-pointer"
               >
                 Send Ethereum
               </button>
@@ -111,6 +114,7 @@ const Welcome: React.FC = () => {
           </div>
         </div>
       </div>
+      <OurServices />
     </>
   );
 };
