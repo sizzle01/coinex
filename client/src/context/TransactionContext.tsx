@@ -8,6 +8,7 @@ export const TransactionContext = React.createContext({});
 declare global {
   interface Window { // ⚠️ notice that "Window" is capitalized here
     ethereum: any;
+    ethers:any
   }
 }
 
