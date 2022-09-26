@@ -5,6 +5,12 @@ import { contractABI, contractAddress } from "../utils/constants";
 
 export const TransactionContext = React.createContext({});
 
+declare global {
+  interface Window { // ⚠️ notice that "Window" is capitalized here
+    ethereum: any;
+  }
+}
+
 const createEthereumContract = () => {
   // @ts-ignore
   const { ethereum } = window;
@@ -87,7 +93,7 @@ export const TransactionProvider = ({ children }: any) => {
 
   const connectWallet = async () => {
     try {
-      // @ts-ignore
+     
       const { ethereum } = window;
 
       if (!ethereum) return alert("please install metamask to continue");
