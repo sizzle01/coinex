@@ -1,17 +1,14 @@
-import type { NextPage } from 'next'
+import React from "react";
+import type { NextPage } from "next";
 
-import Welcome from '../components/Welcome'
-
-
+import Slider from "../components/Slider";
 
 const Home: NextPage = () => {
-  
   return (
-    
-<div className="">
- <Welcome />
-</div>
-  )
-}
+    <>
+      <Slider />
+    </>
+  );
+};
 
-export default Home
+export default Home;

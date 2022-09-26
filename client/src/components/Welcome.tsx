@@ -4,15 +4,18 @@ import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
 import TextField from "./globals/TextField";
 import Loader from "./Loader";
+import HeroImage from '../../images/send.webp';
 
 import { TransactionContext } from "../context/TransactionContext";
 import { trimAddress } from "../utils/TrimAddress";
 import OurServices from "./OurServices";
+import Image from "next/image";
+
 
 
 const Welcome: React.FC = () => {
  // @ts-ignore
-  const {connectWallet, currentAccount,formData,handleChange,sendTransaction,
+  const {connectWallet, currentAccount,formData,handleChange,sendTransaction,isloading
   } = useContext(TransactionContext);
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -70,9 +73,9 @@ const Welcome: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="w-full bg-gradient-to-r from-purple-600 via-pink-600 to-blue-500">
+      <div className="w-full flex md:flex-row flex-col items-start justify-between items-center bg-gradient-to-r from-purple-600 via-pink-600 to-blue-500">
         <div className="p-5 sm:w-[50%] w-full flex flex-col justify-start items-center bg-[#2952e3]">
-          <div className="w-[70%]">
+          <div className="w-[80%]">
             <TextField
               placeholder="Recipient"
               type="text"
@@ -100,7 +103,7 @@ const Welcome: React.FC = () => {
 
             <div className="h-[1px] w-full bg-gray-400 my-2" />
 
-            {false ? (
+            {isloading ? (
               <Loader />
             ) : (
               <button
@@ -113,8 +116,12 @@ const Welcome: React.FC = () => {
             )}
           </div>
         </div>
+        <div className="sm:w-[50%] ">
+<Image src={HeroImage} alt='heroImage' />
+          </div>
       </div>
       <OurServices />
+    
     </>
   );
 };

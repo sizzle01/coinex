@@ -57,7 +57,7 @@ const OurServices: React.FC = () => {
           color="bg-[#F84550]"
           title="Fastest transactions"
           icon={<RiHeart2Fill fontSize={21} className="text-white" />}
-          subtitle="Invite your friends & earn up to 20% commission reward every time they make a transaction on coinEx."
+          subtitle="Invite your friends & earn up to 20% commission reward every time they make a transaction."
         />
       </div>
     </div>
