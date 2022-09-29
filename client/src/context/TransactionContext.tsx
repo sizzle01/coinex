@@ -6,7 +6,7 @@ import { contractABI, contractAddress } from "../utils/constants";
 export const TransactionContext = React.createContext({});
 
 declare global {
-  interface Window { // ⚠️ notice that "Window" is capitalized here
+  interface Window { 
     ethereum: any;
     ethers:any
   }
@@ -176,7 +176,7 @@ export const TransactionProvider = ({ children }: any) => {
   };
   useEffect(() => {
     checkIfWalletIsConnected();
-    checkIfTransactionsExists
+    // checkIfTransactionsExists()
     createEthereumContract();
   }, []);
   return (
