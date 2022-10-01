@@ -4,18 +4,22 @@ import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
 import TextField from "./globals/TextField";
 import Loader from "./Loader";
-import HeroImage from '../../images/send.webp';
+import HeroImage from "../../images/send.webp";
 
 import { TransactionContext } from "../context/TransactionContext";
 import { trimAddress } from "../utils/TrimAddress";
 import OurServices from "./OurServices";
 import Image from "next/image";
 
-
-
 const Welcome: React.FC = () => {
- // @ts-ignore
-  const {connectWallet, currentAccount,formData,handleChange,sendTransaction,isloading
+  // @ts-ignore
+  const {
+    connectWallet,
+    currentAccount,
+    formData,
+    handleChange,
+    sendTransaction,
+    isloading,
   } = useContext(TransactionContext);
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -62,10 +66,13 @@ const Welcome: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-white font-light text-sm">
-                    {trimAddress(currentAccount)}
+                    <span className="font-semibold mr-2">
+                      {trimAddress(currentAccount)}
+                    </span>
+                    Bal: 1.3987ETH
                   </p>
                   <p className="text-white font-semibold text-lg mt-1">
-                    Ethereum
+                    Ethereum/Goerli
                   </p>
                 </div>
               </div>
@@ -73,7 +80,7 @@ const Welcome: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="w-full flex md:flex-row flex-col items-start justify-between items-center bg-gradient-to-r from-purple-600 via-pink-600 to-blue-500">
+      <div className="w-full flex md:flex-row flex-col items-start justify-between  bg-gradient-to-r from-purple-600 via-pink-600 to-blue-500">
         <div className="p-5 sm:w-[50%] w-full flex flex-col justify-start items-center bg-[#2952e3]">
           <div className="w-[80%]">
             <TextField
@@ -117,11 +124,10 @@ const Welcome: React.FC = () => {
           </div>
         </div>
         <div className="sm:w-[50%] ">
-<Image src={HeroImage} alt='heroImage' />
-          </div>
+          <Image src={HeroImage} alt="heroImage" />
+        </div>
       </div>
       <OurServices />
-    
     </>
   );
 };
