@@ -21,15 +21,15 @@ const Navbar: React.FC = () => {
   const [toggleMenu, setToggleMenu] = React.useState<boolean>(false);
 
   return (
-   <nav className='w-full flex md:justify-center justify-between items-center p-4 bg-darkBg' >
-    <div className="md:flex-[0.5] flex-initial justify-center items-center">
-        <Image src={Logo} alt="logo" height={100} width={200} className="cursor-pointer" />
+   <nav className='w-full flex  justify-between items-center py-6 px-4 bg-darkBg' >
+    <div className="w-[124px] h-[32px]  flex-initial justify-center items-center">
+        <Image src={Logo} alt="logo" height={50} width={200} className="cursor-pointer" />
       </div>
       <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
         {[ "NFTs", "Manager", "Wallets"].map((item, index) => (
           <NavBarItem key={index} title={item} />
         ))}
-        <li className="bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]">
+        <li className="bg-blue-gradient py-2 px-7 mx-4 rounded-full cursor-pointer ">
           Connect Wallet
         </li>
       </ul>

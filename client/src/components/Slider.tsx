@@ -44,7 +44,6 @@ const Slider: React.FC<SliderProps> = () => {
         scrollbar={{ draggable: true }}
         spaceBetween={0}
         slidesPerView={1}
-        onSwiper={(swiper) => console.log(swiper)}
         className="h-[100vh] w-full"
       >
         {items.map((item, index) => (
@@ -52,8 +51,8 @@ const Slider: React.FC<SliderProps> = () => {
             key={index}
             className="h-[100vh] flex flex-col w-full  justify-center items-center"
           >
-            <SwiperSlide className="h-screen flex flex-col w-full  justify-center items-center bg-gradient-to-r from-purple-600 via-pink-600 to-blue-500 ">
-              <div className=" w-full flex flex-col w-full  justify-center items-center">
+            <SwiperSlide className="h-screen flex flex-col w-full  justify-center items-center bg-blue-gradient">
+              <div className=" w-full flex flex-col justify-center items-center">
                 <div className="h-[400px] w-[500px]">{item.image}</div>
 
                 <div className="mt-[-20px] font-semibold text-center text-xl text-white">

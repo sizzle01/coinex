@@ -4,7 +4,7 @@ import Layout from '../components/globals/Layout'
 
 const welcome = () => {
   return (
-    <div>
+    <div className='bg-primary'>
         <Layout>
         <Welcome />
         </Layout>

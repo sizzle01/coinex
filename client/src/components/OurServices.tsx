@@ -26,7 +26,7 @@ const ServiceCard:React.FC<cardProps> = ({ color, title, icon, subtitle }) => (
 
 const OurServices: React.FC = () => {
   return (
-    <div className="flex w-full justify-center items-center bg-gradient-to-r from-purple-600 via-pink-600 to-blue-500">
+    <div className="flex w-full justify-center items-center bg-primary">
     <div className=" flex-col flex md:flex-row items-center justify-between md:p-20 py-12 px-4">
       <div className="flex-1 flex flex-col justify-start items-start">
         <h1 className="text-white text-3xl sm:text-5xl py-2 text-gradient ">
