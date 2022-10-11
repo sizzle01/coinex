@@ -6,16 +6,35 @@ import { AiOutlineClose } from "react-icons/ai";
 import Logo from '../../images/logo.png'
 import Image from 'next/image';
 import { TransactionContext } from '../context/TransactionContext';
+import Link from 'next/link';
 
 
 interface NavBArItemProps {
 title:string
 classprops?: string
+link: string
 }
 
-const NavBarItem: React.FC<NavBArItemProps> = ({ title, classprops }) => (
+const NavBarItem: React.FC<NavBArItemProps> = ({ title, classprops, link }) => (
+  <Link href={link}>
   <li className={`mx-4 cursor-pointer ${classprops}`}>{title}</li>
+  </Link>
 );
+
+const NavBarItemValues = [
+  {
+    title : "NFTs",
+    link: "nftpage"
+  },
+  {
+    title : "Manager",
+    link: "nftpage"
+  },
+  {
+    title : "Wallets",
+    link: "nftpage"
+  }
+]
 
 const Navbar: React.FC = () => {
   // @ts-ignore
@@ -28,8 +47,8 @@ const Navbar: React.FC = () => {
         <Image src={Logo} alt="logo" height={50} width={200} className="cursor-pointer" />
       </div>
       <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
-        {[ "NFTs", "Manager", "Wallets"].map((item, index) => (
-          <NavBarItem key={index} title={item} />
+        {NavBarItemValues.map((item, index) => (
+          <NavBarItem key={index} title={item.title} link={item.link} />
         ))}
          {!currentAccount && (
               <button

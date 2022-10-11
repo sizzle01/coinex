@@ -1,10 +1,8 @@
 import React, { useContext } from "react";
-import { AiFillPlayCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
 import TextField from "./globals/TextField";
 import Loader from "./Loader";
-import HeroImage from '../../images/send.webp';
 import styles from '../style'
 import discount from '../../images/assets/Discount.svg'
 import robot from '../../images/assets/robot.png'
