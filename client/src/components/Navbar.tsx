@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {useContext} from 'react'
 
 import { HiMenuAlt4 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
 
 import Logo from '../../images/logo.png'
 import Image from 'next/image';
+import { TransactionContext } from '../context/TransactionContext';
 
 
 interface NavBArItemProps {
@@ -17,7 +18,8 @@ const NavBarItem: React.FC<NavBArItemProps> = ({ title, classprops }) => (
 );
 
 const Navbar: React.FC = () => {
-
+  // @ts-ignore
+  const {connectWallet, currentAccount} = useContext(TransactionContext)
   const [toggleMenu, setToggleMenu] = React.useState<boolean>(false);
 
   return (
@@ -29,9 +31,18 @@ const Navbar: React.FC = () => {
         {[ "NFTs", "Manager", "Wallets"].map((item, index) => (
           <NavBarItem key={index} title={item} />
         ))}
-        <li className="bg-blue-gradient py-2 px-7 mx-4 rounded-full cursor-pointer ">
+         {!currentAccount && (
+              <button
+                type="button"
+                onClick={connectWallet}
+              >
+                 <li className="bg-blue-gradient py-2 px-7 mx-4 rounded-full cursor-pointer ">
           Connect Wallet
         </li>
+              </button>
+            )}
+            
+      
       </ul>
       <div className="flex relative">
       {!toggleMenu && (

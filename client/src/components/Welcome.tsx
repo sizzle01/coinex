@@ -93,7 +93,14 @@ const Welcome: React.FC = () => {
           </div>
 
       <div className={`ss:hidden ${styles.flexCenter}`}>
-        <GetStarted />
+      {!currentAccount && (
+              <button
+                type="button"
+                onClick={connectWallet}
+              >
+                <GetStarted />
+              </button>
+            )}
       </div>
     </section>
       {/* <div className="flex w-full justify-center items-center bg-primary">
