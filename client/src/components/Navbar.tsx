@@ -7,6 +7,7 @@ import Logo from '../../images/logo.png'
 import Image from 'next/image';
 import { TransactionContext } from '../context/TransactionContext';
 import Link from 'next/link';
+import { useRouter } from 'next/router'
 
 
 interface NavBArItemProps {
@@ -40,6 +41,7 @@ const Navbar: React.FC = () => {
   // @ts-ignore
   const {connectWallet, currentAccount} = useContext(TransactionContext)
   const [toggleMenu, setToggleMenu] = React.useState<boolean>(false);
+  const router = useRouter();
 
   return (
    <nav className='w-full flex  justify-between items-center py-6 px-4 bg-darkBg' >

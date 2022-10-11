@@ -1,9 +1,12 @@
 import React from 'react'
 import styles from '../style'
 import Image from "next/image";
+import Layout from '../components/globals/Layout';
+import NftImage from '../../images/assets/nfticon.png'
 
 const nftpage = () => {
   return (
+    <Layout>
     <div className={`flex md:flex-row flex-col bg-primary ${styles.paddingY} ${styles.paddingX} ${styles.flexCenter}`}>
          <div className={`flex-1 ${styles.flexStart} flex-col  sm:px-16 px-6`}>
 
@@ -23,14 +26,15 @@ const nftpage = () => {
         </p>
       </div>
       <div className="flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10">
-            <div className="p-3 flex justify-end items-start flex-col rounded-xl h-48 xl:w-[70%] w-full my-5 eth-card bg-blue-gradient">
+            <div className="p-3 flex justify-end items-start flex-col rounded-xl  xl:w-full w-full my-5">
               <div className="flex justify-between flex-col w-full h-full">
-               
+              <Image src={NftImage} alt="discount"  />
               
               </div>
             </div>
           </div>
     </div>
+    </Layout>
   )
 }
 
