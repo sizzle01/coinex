@@ -1,41 +1,75 @@
-import React from 'react'
-import styles from '../style'
-import Image from "next/image";
-import Layout from '../components/globals/Layout';
-import NftImage from '../../images/assets/nfticon.png'
+import React, { useContext, useState } from "react";
+import Layout from "../components/globals/Layout";
+import { TransactionContext } from "../context/TransactionContext";
+import { trimAddress } from "../utils/TrimAddress";
+import { protocols } from "../utils/Data";
+import TableDetails from "../components/TableDetails";
 
 const nftpage = () => {
+  const { currentAccount, setNetwork, network, transaction } =
+    useContext(TransactionContext);
+
   return (
     <Layout>
-    <div className={`flex md:flex-row flex-col bg-primary ${styles.paddingY} ${styles.paddingX} ${styles.flexCenter}`}>
-         <div className={`flex-1 ${styles.flexStart} flex-col  sm:px-16 px-6`}>
-
-        <div className="flex flex-row justify-between items-center w-full">
-          <h1 className="flex-1 font-poppins font-semibold ss:text-[72px] text-[52px] text-white ss:leading-[100.8px] leading-[75px]">
-            Create, sell and collect <br className="sm:block hidden" />{" "}
-            <span className="text-gradient">Digital assets</span>{" "}
-          </h1>
-        
+      <div className="bg-primary text-white pt-2 px-3 overflow-scroll">
+        <div className="flex gap-x-4">
+          <button className="rounded-full border border-blue-400 px-2">
+            <span>{trimAddress(currentAccount) || "Connect"}</span>
+          </button>
+          <select
+            name="network"
+            id="network"
+            value={network}
+            onChange={(e) => {
+              setNetwork(e.target.value);
+            }}
+            className="bg-darkBg rounded-full px-2 cursor-pointer flex items-center"
+          >
+            {protocols.map((item) => {
+              return (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              );
+            })}
+          </select>
         </div>
-
-        <h1 className="font-poppins font-semibold ss:text-[68px] text-[52px] text-white ss:leading-[100.8px] leading-[75px] w-full">
-          Crypto management platform
-        </h1>
-        <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
-          Our team of experts provide Nft platform which is ethereum enabled.
-        </p>
+        <div className="my-6">
+          <p className="text-3xl font-bold">Net Worth</p>
+          <h2 className="text-2xl">7.12ETH</h2>
+        </div>
+        <table className="border-collapse table-auto w-full text-sm mt-5">
+          <thead>
+            <tr>
+              <th className="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                Id
+              </th>
+              <th className="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                Block Number
+              </th>
+              <th className="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                Date
+              </th>
+              <th className="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                Status
+              </th>
+              <th className="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                No of Events
+              </th>
+              <th className="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                Confirmations
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white dark:bg-slate-800">
+            {transaction?.map((item: any) => {
+              return <TableDetails item={item} />;
+            })}
+          </tbody>
+        </table>
       </div>
-      <div className="flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10">
-            <div className="p-3 flex justify-end items-start flex-col rounded-xl  xl:w-full w-full my-5">
-              <div className="flex justify-between flex-col w-full h-full">
-              <Image src={NftImage} alt="discount"  />
-              
-              </div>
-            </div>
-          </div>
-    </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default nftpage
+export default nftpage;

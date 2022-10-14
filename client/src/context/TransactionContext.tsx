@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
+import { instance } from "../services/ubiquityApi";
 
 import { contractABI, contractAddress } from "../utils/constants";
 
@@ -30,7 +31,23 @@ export const TransactionProvider = ({ children }: any) => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [isloading, setIsLoading] = useState(false);
   const [transactions, setTransactions] = useState([]);
-  // const [transactionCount, setTransactionCount] = useState(localStorage.getItem('transactioCount'))
+  const [transaction, setTransaction] = useState([]);
+  const [network, setNetwork] = useState("ethereum/goerli");
+
+  const getTransaction = async (network: string) => {
+    try {
+      const request = await instance.get(
+        `universal/v1/${network}/account/${currentAccount}/txs`
+      );
+      setTransaction(request?.data.data);
+    } catch (error) {}
+  };
+  console.log(transaction);
+
+  useEffect(() => {
+    getTransaction(network);
+  }, [network, currentAccount]);
+
   const [formData, setFormData] = useState({
     addressTo: "",
     amount: "",
@@ -198,9 +215,14 @@ export const TransactionProvider = ({ children }: any) => {
         handleChange,
         sendTransaction,
         transactions,
+        transaction,
+        getTransaction,
+        network,
+        setNetwork,
       }}
     >
       {children}
     </TransactionContext.Provider>
   );
 };
+// https://svc.blockdaemon.com/universal/v1/ethereum/goerli/account/0xF0ccc8B440Bf013a37ef722530B1e4727a785CfA/txs?apiKey=9lNOzUvOUrDIKlhmBWzVZRmV7gudlgIeYiLgp9fOPX79Uq7s
