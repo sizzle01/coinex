@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { instance } from "../services/ubiquityApi";
-
 import { contractABI, contractAddress } from "../utils/constants";
+import { transactionType } from "../utils/types";
 
-export const TransactionContext = React.createContext({});
+export const TransactionContext = React.createContext({} as transactionType);
 
 declare global {
   interface Window {
@@ -225,4 +225,3 @@ export const TransactionProvider = ({ children }: any) => {
     </TransactionContext.Provider>
   );
 };
-// https://svc.blockdaemon.com/universal/v1/ethereum/goerli/account/0xF0ccc8B440Bf013a37ef722530B1e4727a785CfA/txs?apiKey=9lNOzUvOUrDIKlhmBWzVZRmV7gudlgIeYiLgp9fOPX79Uq7s

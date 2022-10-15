@@ -94,6 +94,7 @@ const Navbar: React.FC = () => {
                 key={item + index}
                 title={item}
                 classprops="my-2 text-lg"
+                link=""
               />
             ))}
           </ul>

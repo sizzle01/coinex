@@ -5,7 +5,7 @@ import { trimAddress } from "../utils/TrimAddress";
 import { protocols } from "../utils/Data";
 import TableDetails from "../components/TableDetails";
 
-const nftpage = () => {
+const Nftpage = () => {
   const { currentAccount, setNetwork, network, transaction } =
     useContext(TransactionContext);
 
@@ -63,7 +63,7 @@ const nftpage = () => {
           </thead>
           <tbody className="bg-white dark:bg-slate-800">
             {transaction?.map((item: any) => {
-              return <TableDetails item={item} />;
+              return <TableDetails item={item} key={item} />;
             })}
           </tbody>
         </table>
@@ -72,4 +72,4 @@ const nftpage = () => {
   );
 };
 
-export default nftpage;
+export default Nftpage;
