@@ -42,10 +42,11 @@ export const TransactionProvider = ({ children }: any) => {
       setTransaction(request?.data.data);
     } catch (error) {}
   };
-  console.log(transaction);
 
   useEffect(() => {
-    getTransaction(network);
+    if (currentAccount) {
+      getTransaction(network);
+    }
   }, [network, currentAccount]);
 
   const [formData, setFormData] = useState({
@@ -99,8 +100,6 @@ export const TransactionProvider = ({ children }: any) => {
 
       if (!ethereum) return alert("please install metamask");
       const accounts = await ethereum.request({ method: "eth_accounts" });
-
-      console.log(accounts);
 
       if (accounts.length) {
         setCurrentAccount(accounts[0]);
