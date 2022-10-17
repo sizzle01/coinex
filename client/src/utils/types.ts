@@ -22,4 +22,5 @@ export type transactionType = {
   getTransaction: (network: string) => Promise<void>;
   network: string;
   setNetwork: React.Dispatch<React.SetStateAction<string>>;
+  balance: any[];
 };

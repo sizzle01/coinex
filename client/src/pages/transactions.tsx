@@ -6,8 +6,20 @@ import { protocols } from "../utils/Data";
 import TableDetails from "../components/TableDetails";
 
 const Nftpage = () => {
-  const { currentAccount, setNetwork, network, transaction, connectWallet } =
-    useContext(TransactionContext);
+  const {
+    currentAccount,
+    setNetwork,
+    network,
+    transaction,
+    connectWallet,
+    balance,
+  } = useContext(TransactionContext);
+
+  const finalBalance = balance
+    ? balance[0]?.confirmed_balance.slice(0, 6) * 10 ** -5
+    : balance;
+
+  const symbol = balance[0]?.currency?.symbol;
 
   return (
     <Layout>
@@ -36,7 +48,10 @@ const Nftpage = () => {
         </div>
         <div className="my-6">
           <p className="text-3xl font-bold">Net Worth</p>
-          <h2 className="text-2xl">7.12ETH</h2>
+          <h2 className="text-2xl">
+            {finalBalance?.toFixed(3)}
+            {symbol || "Nil"}
+          </h2>
         </div>
         {currentAccount ? (
           <table className="border-collapse table-auto w-full text-sm mt-5">

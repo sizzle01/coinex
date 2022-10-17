@@ -32,6 +32,7 @@ export const TransactionProvider = ({ children }: any) => {
   const [isloading, setIsLoading] = useState(false);
   const [transactions, setTransactions] = useState([]);
   const [transaction, setTransaction] = useState([]);
+  const [balance, setBalance] = useState([]);
   const [network, setNetwork] = useState("ethereum/goerli");
 
   const getTransaction = async (network: string) => {
@@ -40,12 +41,26 @@ export const TransactionProvider = ({ children }: any) => {
         `universal/v1/${network}/account/${currentAccount}/txs`
       );
       setTransaction(request?.data.data);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getWorth = async (network: string) => {
+    try {
+      const request = await instance.get(
+        `universal/v1/${network}/account/${currentAccount}`
+      );
+      setBalance(request?.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     if (currentAccount) {
       getTransaction(network);
+      getWorth(network);
     }
   }, [network, currentAccount]);
 
@@ -218,6 +233,7 @@ export const TransactionProvider = ({ children }: any) => {
         getTransaction,
         network,
         setNetwork,
+        balance,
       }}
     >
       {children}
