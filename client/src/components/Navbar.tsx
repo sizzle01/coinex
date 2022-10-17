@@ -15,24 +15,28 @@ interface NavBArItemProps {
   link: string;
 }
 
-const NavBarItem: React.FC<NavBArItemProps> = ({ title, classprops, link }) => (
-  <Link href="/nftpage">
-    <li className={`mx-4 cursor-pointer ${classprops}`}>{title}</li>
+const NavBarItem: React.FC<NavBArItemProps> = (item) => (
+  <Link href={item.link}>
+    <li className={`mx-4 cursor-pointer`}>{item.title}</li>
   </Link>
 );
 
 const NavBarItemValues = [
   {
-    title: "NFTs",
-    link: "nftpage",
+    title: "Home",
+    link: "/welcome",
+  },
+  {
+    title: "Transactions",
+    link: "/transactions",
   },
   {
     title: "Manager",
-    link: "nftpage",
+    link: "/nftpage",
   },
   {
     title: "Wallets",
-    link: "nftpage",
+    link: "/nftpage",
   },
 ];
 
@@ -89,12 +93,12 @@ const Navbar: React.FC = () => {
             <li className="text-xl w-full my-2">
               <AiOutlineClose onClick={() => setToggleMenu(false)} />
             </li>
-            {["NFTs", "Manager", "Wallets"].map((item, index) => (
+            {NavBarItemValues.map((item, index) => (
               <NavBarItem
-                key={item + index}
-                title={item}
+                key={item.title + index}
+                title={item.title}
                 classprops="my-2 text-lg"
-                link=""
+                link={item.link}
               />
             ))}
           </ul>
