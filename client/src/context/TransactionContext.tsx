@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
-
+import { instance } from "../services/ubiquityApi";
 import { contractABI, contractAddress } from "../utils/constants";
+import { transactionType } from "../utils/types";
 
-export const TransactionContext = React.createContext({});
+export const TransactionContext = React.createContext({} as transactionType);
 
 declare global {
   interface Window {
@@ -30,7 +31,39 @@ export const TransactionProvider = ({ children }: any) => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [isloading, setIsLoading] = useState(false);
   const [transactions, setTransactions] = useState([]);
-  // const [transactionCount, setTransactionCount] = useState(localStorage.getItem('transactioCount'))
+  const [transaction, setTransaction] = useState([]);
+  const [balance, setBalance] = useState([]);
+  const [network, setNetwork] = useState("ethereum/goerli");
+
+  const getTransaction = async (network: string) => {
+    try {
+      const request = await instance.get(
+        `universal/v1/${network}/account/${currentAccount}/txs`
+      );
+      setTransaction(request?.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getWorth = async (network: string) => {
+    try {
+      const request = await instance.get(
+        `universal/v1/${network}/account/${currentAccount}`
+      );
+      setBalance(request?.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (currentAccount) {
+      getTransaction(network);
+      getWorth(network);
+    }
+  }, [network, currentAccount]);
+
   const [formData, setFormData] = useState({
     addressTo: "",
     amount: "",
@@ -82,8 +115,6 @@ export const TransactionProvider = ({ children }: any) => {
 
       if (!ethereum) return alert("please install metamask");
       const accounts = await ethereum.request({ method: "eth_accounts" });
-
-      console.log(accounts);
 
       if (accounts.length) {
         setCurrentAccount(accounts[0]);
@@ -198,6 +229,11 @@ export const TransactionProvider = ({ children }: any) => {
         handleChange,
         sendTransaction,
         transactions,
+        transaction,
+        getTransaction,
+        network,
+        setNetwork,
+        balance,
       }}
     >
       {children}
