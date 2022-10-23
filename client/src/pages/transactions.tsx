@@ -82,8 +82,8 @@ const Nftpage = () => {
             </thead>
             <tbody className="bg-white dark:bg-slate-800">
               {transaction.length > 1 ? (
-                transaction?.map((item: any) => {
-                  return <TableDetails item={item} key={item} />;
+                transaction?.map((item: any, index) => {
+                  return <TableDetails item={item} key={item + index} />;
                 })
               ) : (
                 <tr>
