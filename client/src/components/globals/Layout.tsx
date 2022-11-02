@@ -1,14 +1,13 @@
-import Head from 'next/head'
+import Head from "next/head";
 
-import React, { ReactNode } from 'react'
-import { AnimatePresence } from 'framer-motion'
+import React, { ReactNode } from "react";
+import { AnimatePresence } from "framer-motion";
 
-import Footer from '../Footer'
-import Navbar from '../Navbar'
-
+import Footer from "../Footer";
+import Navbar from "../Navbar";
 
 interface Props {
-  children?: ReactNode
+  children?: ReactNode;
   // any props that come into the component
 }
 const Layout = ({ children }: Props) => {
@@ -49,14 +48,13 @@ const Layout = ({ children }: Props) => {
         />
         <link rel="manifest" href="/site.webmanifest" /> */}
       </Head>
-      <AnimatePresence>
-          <Navbar />
-          {children}
-          <Footer />
-      </AnimatePresence>
+      {/* <AnimatePresence> */}
+      <Navbar />
+      {children}
+      <Footer />
+      {/* </AnimatePresence> */}
     </>
-  )
-}
+  );
+};
 
-export default Layout
-
+export default Layout;

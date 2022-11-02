@@ -23,4 +23,5 @@ export type transactionType = {
   network: string;
   setNetwork: React.Dispatch<React.SetStateAction<string>>;
   balance: any[];
+  isLoading: boolean;
 };

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import Layout from "../components/globals/Layout";
+import Loading from "../components/Loading";
 import { TransactionContext } from "../context/TransactionContext";
 import { trimAddress } from "../utils/TrimAddress";
 import { protocols } from "../utils/Data";
@@ -13,6 +14,7 @@ const Nftpage = () => {
     transaction,
     connectWallet,
     balance,
+    isLoading,
   } = useContext(TransactionContext);
 
   const finalBalance = balance
@@ -21,9 +23,11 @@ const Nftpage = () => {
 
   const symbol = balance[0]?.currency?.symbol;
 
+  if (isLoading) return <Loading />;
+
   return (
     <Layout>
-      <div className="bg-primary text-white pt-2 px-3">
+      <div className="bg-primary text-white pt-2 px-3 overflow-auto">
         <div className="flex gap-x-4">
           <button className="rounded-full border border-blue-400 px-2">
             <span>{trimAddress(currentAccount) || "Connect"}</span>
@@ -50,37 +54,36 @@ const Nftpage = () => {
           <p className="text-3xl font-bold">Net Worth</p>
           <h2 className="text-2xl">
             {finalBalance?.toFixed(3)}
-            {symbol || "Nil"}
+            {symbol || balance}
           </h2>
         </div>
         {currentAccount ? (
           <table className="border-collapse table-auto w-full text-sm mt-5">
             <thead>
               <tr>
-                <th className="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                  Id
-                </th>
-                <th className="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                  Block Number
-                </th>
-                <th className="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                  Date
-                </th>
-                <th className="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                  Status
-                </th>
-                <th className="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                  No of Events
-                </th>
-                <th className="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
-                  Confirmations
-                </th>
+                {[
+                  "id",
+                  "Block Number",
+                  "Date",
+                  "Status",
+                  "No of Events",
+                  "Confirmations",
+                ].map((item) => {
+                  return (
+                    <th
+                      className="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
+                      key={item}
+                    >
+                      {item}
+                    </th>
+                  );
+                })}
               </tr>
             </thead>
             <tbody className="bg-white dark:bg-slate-800">
               {transaction.length > 1 ? (
-                transaction?.map((item: any) => {
-                  return <TableDetails item={item} key={item} />;
+                transaction?.map((item: any, index) => {
+                  return <TableDetails item={item} key={item + index} />;
                 })
               ) : (
                 <tr>

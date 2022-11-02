@@ -47,7 +47,7 @@ const Slider: React.FC<SliderProps> = () => {
       >
         {items.map((item, index) => (
           <div
-            key={index}
+            key={index + item.name}
             className="h-[100vh] flex flex-col w-full  justify-center items-center"
           >
             <SwiperSlide className="h-screen flex flex-col w-full  justify-center items-center bg-blue-gradient">

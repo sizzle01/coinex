@@ -6,26 +6,28 @@ const TableDetails = ({ item }: any) => {
 
   const Date = new Converter.date(item.date);
   return (
-    <tr>
-      <td className="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
-        {trim(item.id)}
-      </td>
-      <td className="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
-        {item.block_number}
-      </td>
-      <td className="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
-        {Date.formatDay}
-      </td>
-      <td className="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
-        {item.status}
-      </td>
-      <td className="border-b border-slate-100 dark:border-slate-700 px-10 text-slate-500 dark:text-slate-400">
-        {item.num_events}
-      </td>
-      <td className="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
-        {item.confirmations}
-      </td>
-    </tr>
+    <>
+      <tr>
+        <td className="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400 flex items-center justify-start gap-x-2 cursor-pointer">
+          {trim(item.id)}
+        </td>
+        <td className="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+          {item.block_number}
+        </td>
+        <td className="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+          {Date.formatDay}
+        </td>
+        <td className="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+          {item.status}
+        </td>
+        <td className="border-b border-slate-100 dark:border-slate-700 px-10 text-slate-500 dark:text-slate-400">
+          {item.num_events}
+        </td>
+        <td className="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+          {item.confirmations}
+        </td>
+      </tr>
+    </>
   );
 };
 
